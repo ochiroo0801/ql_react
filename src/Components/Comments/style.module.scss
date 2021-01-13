@@ -1,0 +1,59 @@
+@import "../../Utilities/utilities";
+
+.item {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-radius: 8px;
+  border: 1px solid #8d8d8d33;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $blue;
+    box-shadow: 0 0 8px #505050;
+
+    .commentContent {
+      h5 {
+        color: #fff;
+      }
+    }
+
+    .author {
+      box-shadow: 0 0 8px #000000;
+    }
+  }
+
+  .author {
+    width: 60px;
+    height: 60px;
+    background: $blue;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .commentContent {
+    width: 80%;
+    margin-left: 20px;
+
+    h6 {
+      color: #000;
+      font-size: 12px;
+    }
+
+    h5 {
+      font-weight: 500;
+      margin-top: 8px;
+      color: $grey;
+    }
+  }
+}

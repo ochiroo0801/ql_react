@@ -1,0 +1,68 @@
+@import "../../Utilities/utilities";
+
+.channel {
+  background-image: linear-gradient(#000105, #080321);
+  padding: 50px;
+  border-radius: 20px;
+  margin-top: 50px;
+
+  .top {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      width: 80px;
+      height: 80px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .rigth {
+      margin-left: 50px;
+
+      h2 {
+        color: #fff;
+      }
+    }
+
+    .location {
+      display: flex;
+      margin-top: 10px;
+
+      img {
+        width: 23px;
+      }
+
+      h3 {
+        margin-left: 20px;
+        color: grey;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 50px;
+    color: #fff;
+
+    .item {
+      flex: 1;
+
+      &:nth-child(2) {
+        border-left: 1px solid #575757;
+        border-right: 1px solid #575757;
+      }
+
+      h2 {
+        font-weight: 400;
+        font-size: 18px;
+      }
+    }
+  }
+}
