@@ -6,6 +6,7 @@ import css from "./style.module.scss";
 import youtube from "../../svg/youtube.svg";
 import Comments from "../../Components/Comments/Comments";
 import VideoInfo from "../../Components/VideoInfo/VideoInfo";
+import PreLoader from "../../Components/PreLoader/PreLoader";
 
 function Details({ match }) {
   const {
@@ -25,7 +26,7 @@ function Details({ match }) {
 
   useEffect(() => {
     getApi(commentsApi, setComments);
-  }, [videoMainId]);
+  }, [commentsApi]);
 
   let { id } = match?.params;
 

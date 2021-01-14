@@ -1,5 +1,7 @@
 import React from "react";
+
 import Channel from "../../Components/Channel/Channel";
+
 import Slider from "../../Components/Slider/Slider";
 import Title from "../../Components/Title/Title";
 import Videos from "../../Components/Videos/Videos";

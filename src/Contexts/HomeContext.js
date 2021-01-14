@@ -20,6 +20,7 @@ function HomeProvider(props) {
   const [videoMainId, setVideoMainId] = useState("");
   const [comments, setComments] = useState([]);
   const [videoData, setVideoData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getApi(playList, setListData);
@@ -62,6 +63,8 @@ function HomeProvider(props) {
         setVideoData,
         shadow,
         setShadow,
+        loading,
+        setLoading,
       }}
     >
       {props.children}

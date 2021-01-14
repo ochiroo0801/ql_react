@@ -1,12 +1,12 @@
 import "./App.css";
-import { matchPath, Route, Switch } from "react-router-dom";
-import HomeProvider from "./Contexts/HomeContext";
+import { Route, Switch } from "react-router-dom";
 
 import Header from "./Components/Header/Header";
 import Home from "./Pages/Home/Home";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import ToTop from "./Components/ToTop/ToTop";
 import Details from "./Pages/Details/Details";
+import HomeProvider from "./Contexts/HomeContext";
 
 function App() {
   return (
