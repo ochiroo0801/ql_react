@@ -2,28 +2,30 @@ import React, { useContext, useEffect } from "react";
 import { HomeContext } from "../../Contexts/HomeContext";
 import css from "./style.module.scss";
 
-function VideoInfo() {
+function VideoInfo({ id }) {
   const {
-    videoMainId,
     Api_Key,
     setVideoData,
     videoData,
     getApi,
     numFormat,
+    setCommentLength,
   } = useContext(HomeContext);
 
-  const videoInfo = `https://www.googleapis.com/youtube/v3/videos?id=${videoMainId}&key=${Api_Key}&part=statistics`;
+  const videoInfo = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${Api_Key}&part=statistics`;
 
   useEffect(() => {
     getApi(videoInfo, setVideoData);
-  }, [videoMainId]);
+  }, [videoInfo]);
 
   return (
-    <div>
-      {videoData.map((e) => {
+    <div key={id}>
+      {videoData?.map((e) => {
         const { statistics } = e;
         const { commentCount, likeCount, viewCount } = statistics;
-
+        {
+          setCommentLength(commentCount);
+        }
         return (
           <div key={e.id} className={css.videoInfo}>
             <div className={css.infoItem}>

@@ -17,7 +17,8 @@
 
     .header {
       width: 90%;
-      background: $toLeft;
+      background-size: cover;
+      background-position: top center;
       display: flex;
       height: 280px;
       border-radius: 0 80px 0 80px;
@@ -70,15 +71,18 @@
     }
 
     .comments {
+      margin-left: 30px;
       position: relative;
       min-height: 450px;
       margin-top: -80px;
-      width: 100%;
-      background: #fff;
+      width: 95%;
       padding-top: 180px;
       padding-bottom: 50px;
       border-radius: 0 80px 80px 0;
+      background-repeat: repeat-y;
+      background-size: auto;
       z-index: -1;
+      background: rgba(0, 1, 78, 0.226);
 
       h4 {
         margin-left: 80px;
@@ -93,16 +97,17 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #0e0b20;
-    z-index: -1;
     cursor: pointer;
+    background-size: cover;
+    background-repeat: repeat-y;
   }
 }
 
 .player {
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
+  overflow: hidden;
   top: 0;
   left: 0;
   z-index: 9999;

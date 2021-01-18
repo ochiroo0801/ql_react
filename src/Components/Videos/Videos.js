@@ -6,11 +6,12 @@ import { HomeContext } from "../../Contexts/HomeContext";
 import css from "./style.module.scss";
 
 function Videos() {
-  const { listData } = useContext(HomeContext);
+  const { listData, loading } = useContext(HomeContext);
 
   return (
     <div className={css.videos}>
-      {listData.map((e) => {
+      {loading && <h1>Loading</h1>}
+      {listData?.map((e) => {
         const { id, snippet } = e;
         const { thumbnails = {} } = snippet;
         const { maxres = {} } = thumbnails;

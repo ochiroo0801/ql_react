@@ -15,22 +15,37 @@ const channelInfo = `${YouTube_Url}channels?part=snippet&part=statistics&id=${ch
 function HomeProvider(props) {
   const [sideBar, setSideBar] = useState(false);
   const [shadow, setShadow] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [listData, setListData] = useState([]);
   const [channelData, setChannelData] = useState([]);
-  const [videoMainId, setVideoMainId] = useState("");
+  const [videoMainId, setVideoMainId] = useState([]);
   const [comments, setComments] = useState([]);
   const [videoData, setVideoData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [commentLength, setCommentLength] = useState("");
 
   useEffect(() => {
-    getApi(playList, setListData);
     getApi(channelInfo, setChannelData);
+    getApi(playList, setListData);
   }, []);
 
-  const getApi = (url, state) => {
-    fetch(url)
-      .then((resp) => resp.json())
-      .then((data) => state(data?.items));
+  // const getApi = (url, state) => {
+  //   fetch(url)
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       state(data?.items);
+  //     });
+  // };
+
+  const getApi = async (url, state) => {
+    try {
+      setLoading(true);
+      const resp = await fetch(url);
+      const data = await resp.json();
+      state(data.items);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
   };
 
   const openSideBar = () => {
@@ -63,8 +78,9 @@ function HomeProvider(props) {
         setVideoData,
         shadow,
         setShadow,
+        commentLength,
+        setCommentLength,
         loading,
-        setLoading,
       }}
     >
       {props.children}
