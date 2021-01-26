@@ -1,6 +1,6 @@
-@import "../../Utilities/utilities";
+import styled from "styled-components";
 
-.details {
+const Div = styled.div`
   top: 0;
   left: 0;
   width: 100%;
@@ -101,32 +101,34 @@
     background-size: cover;
     background-repeat: repeat-y;
   }
-}
 
-.player {
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .video {
-    width: 1280px;
-    height: 780px;
-    background: #000;
-  }
-
-  .shadow {
-    position: absolute;
-    cursor: pointer;
+  .player {
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.788);
-    z-index: -1;
+    height: 100vh;
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .video {
+      width: 1280px;
+      height: 780px;
+      background: #000;
+    }
+
+    .shadow {
+      position: absolute;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.788);
+      z-index: -1;
+    }
   }
-}
+`;
+
+export default Div;

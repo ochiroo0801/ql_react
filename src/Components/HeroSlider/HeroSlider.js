@@ -1,38 +1,30 @@
 import React from "react";
 
+import { desktop, tablet } from "../../media_sizes";
+
+// SWIPER
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
+import SwiperCore, { Autoplay, EffectFade } from "swiper";
 import "swiper/swiper.scss";
+import "swiper/components/effect-fade/effect-fade.scss";
 
-import css from "./style.module.scss";
-
+import Div from "./style";
 // Images
 import slide1 from "../../img/slide1.jpg";
-import wrapper from "../../Utilities/_utilities.scss";
+import slide1_mobile from "../../img/slide1_mobile.jpg";
+
+SwiperCore.use([Autoplay, EffectFade]);
 
 function HeroSlider() {
   return (
-    <div>
-      <Swiper className={css.slider} slidesPerView={1}>
-        <SwiperSlide className={css.slide}>
-          <img src={slide1} alt="" />
-          <h3>Test</h3>
-          <h1>Tester</h1>
+    <Div>
+      <Swiper effect="fade">
+        <SwiperSlide className="slide">
+          {!tablet.matches && <img src={slide1_mobile} alt="" />}
+          {tablet.matches && <img src={slide1} alt="" />}
         </SwiperSlide>
-        <SwiperSlide className={css.slide}>
-          <img src={slide1} alt="" />
-          <h3>Test</h3>
-          <h1>Tester</h1>
-        </SwiperSlide>
-        <SwiperSlide className={css.slide}>
-          <img src={slide1} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={css.slide}>
-          <img src={slide1} alt="" />
-        </SwiperSlide>
-        ...
       </Swiper>
-    </div>
+    </Div>
   );
 }
 

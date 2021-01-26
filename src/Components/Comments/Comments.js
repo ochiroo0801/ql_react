@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { HomeContext } from "../../Contexts/HomeContext";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import like from "../../svg/like.svg";
-import css from "./style.module.scss";
+import Div from "./style";
 
 function Comments({ id }) {
   const {
@@ -19,8 +19,6 @@ function Comments({ id }) {
   useEffect(() => {
     getApi(commentsApi, setComments);
   }, [id]);
-
-  console.log(loading);
 
   return (
     <div>
@@ -40,20 +38,20 @@ function Comments({ id }) {
         } = snippet;
 
         return (
-          <div className={css.item} key={publishedAt}>
-            <div className={css.author}>
+          <Div key={publishedAt}>
+            <div className="author">
               <LazyLoadImage src={authorProfileImageUrl} alt="" />
             </div>
-            <div className={css.commentContent}>
-              <div className={css.head}>
+            <div className="commentContent">
+              <div className="head">
                 <h6>{authorDisplayName}</h6>
                 <h5>{publishedAt.replace("T", " ").split("Z")}</h5>
               </div>
               {likeCount === 0 ? (
                 ""
               ) : (
-                <div className={css.likes}>
-                  <div className={css.like}>
+                <div className="likes">
+                  <div className="like">
                     <img src={like} alt="" />
                   </div>
                   <h5>{likeCount}</h5>
@@ -62,14 +60,14 @@ function Comments({ id }) {
 
               {textDisplay?.split("<br />").map((e) => (
                 <h5
-                  className={css.comment}
+                  className="comment"
                   key={updatedAt + likeCount * Math.random()}
                 >
                   {e}
                 </h5>
               ))}
             </div>
-          </div>
+          </Div>
         );
       })}
     </div>

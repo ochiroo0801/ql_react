@@ -1,19 +1,48 @@
+import { motion } from "framer-motion";
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
+import SwiperCore, { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.scss";
-import css from "./style.module.scss";
 
-import niitiin from "../../img/niitiin_banner.png";
-import pop from "../../img/pop_banner.png";
-import hiphop from "../../img/hiphop_banner.png";
+const Div = styled(motion.div)`
+  width: 100%;
+  margin: auto;
 
-function Slider() {
+  .swiper {
+    padding: 15px 10px;
+    width: 100%;
+
+    .slide {
+      width: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+`;
+
+SwiperCore.use([Autoplay]);
+
+function Slider({ slide }) {
   return (
-    <div className={css.slider}>
+    <Div
+      initial={{ y: 300, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 1, type: "spring" }}
+    >
       <Swiper
-        className={css.swiper}
-        spaceBetween={50}
+        className="swiper"
+        spaceBetween={30}
+        autoplay={true}
+        loop={true}
         breakpoints={{
           640: {
             slidesPerView: 1,
@@ -26,17 +55,42 @@ function Slider() {
           },
         }}
       >
-        <SwiperSlide className={css.slide}>
-          <img src={niitiin} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={css.slide}>
-          <img src={pop} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={css.slide}>
-          <img src={hiphop} alt="" />
-        </SwiperSlide>
+        {slide.map((e) => {
+          if (e.snippet) {
+            const { id, snippet } = e;
+            const { thumbnails = {} } = snippet;
+            const { maxres = {} } = thumbnails;
+
+            return (
+              <SwiperSlide key={id}>
+                <Link to={`/details/${id}`}>
+                  <motion.div
+                    className="slide"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <LazyLoadImage src={maxres.url} />
+                  </motion.div>
+                </Link>
+              </SwiperSlide>
+            );
+          }
+
+          if (e.img)
+            return (
+              <SwiperSlide key={e.id}>
+                <motion.div
+                  className="slide"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <LazyLoadImage src={e.img} />
+                </motion.div>
+              </SwiperSlide>
+            );
+        })}
       </Swiper>
-    </div>
+    </Div>
   );
 }
 

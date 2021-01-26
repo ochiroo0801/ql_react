@@ -1,13 +1,15 @@
-@import "../../Utilities/utilities";
+import { motion } from "framer-motion";
+import styled from "styled-components";
+import { desktop, phonexl } from "../../Utilities/Utilities";
 
-.channel {
+const Div = styled(motion.div)`
   width: 100%;
   background-image: linear-gradient(#000105, #080321);
   padding: 50px;
   border-radius: 20px;
   margin-top: 50px;
 
-  @include sm {
+  @media (min-width: ${phonexl}) {
     margin: auto;
     width: $wrapper;
   }
@@ -17,7 +19,7 @@
     align-items: center;
     flex-direction: column;
 
-    @include lg {
+    @media (min-width: ${desktop}) {
       flex-direction: row;
     }
 
@@ -35,7 +37,7 @@
       text-align: center;
       margin-top: 20px;
 
-      @include lg {
+      @media (min-width: ${desktop}) {
         margin-top: 0;
         margin-left: 50px;
       }
@@ -70,7 +72,7 @@
     margin-top: 50px;
     color: #fff;
 
-    @include lg {
+    @media (min-width: ${desktop}) {
       flex-direction: row;
     }
 
@@ -79,7 +81,7 @@
       width: 100%;
       padding: 15px 0;
 
-      @include lg {
+      @media (min-width: ${desktop}) {
         padding: 0;
       }
 
@@ -87,7 +89,7 @@
         border-top: 1px solid #575757;
         border-bottom: 1px solid #575757;
 
-        @include lg {
+        @media (min-width: ${desktop}) {
           border: none;
           border-left: 1px solid #575757;
           border-right: 1px solid #575757;
@@ -97,7 +99,10 @@
       h2 {
         font-weight: 400;
         font-size: 18px;
+        margin-top: 8px;
       }
     }
   }
-}
+`;
+
+export default Div;

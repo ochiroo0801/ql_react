@@ -1,11 +1,30 @@
 import React, { useContext } from "react";
+import { motion } from "framer-motion";
+
+import Div from "./style";
+
 import { HomeContext } from "../../Contexts/HomeContext";
-import css from "./style.module.scss";
 import logo from "../../img/logo.png";
 import location from "../../svg/location.svg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-function Channel() {
+function Channel({ afterLoad }) {
   const { channelData, numFormat } = useContext(HomeContext);
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 200 },
+    show: { opacity: 1, y: 0 },
+  };
 
   return (
     <div>
@@ -15,36 +34,43 @@ function Channel() {
         const { subscriberCount, videoCount, viewCount } = statistics;
 
         return (
-          <div className={css.channel} key={e.id}>
-            <div className={css.top}>
-              <div className={css.logo}>
-                <img src={logo} alt="" />
-              </div>
+          <Div
+            key={e.id + title}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.9 }}
+            variants={container}
+            initial="hidden"
+            animate="show"
+          >
+            <div className="top">
+              <motion.div variants={item} className="logo">
+                <LazyLoadImage src={logo} alt="" />
+              </motion.div>
 
-              <div className={css.rigth}>
-                <h2>{title}</h2>
-                <div className={css.location}>
-                  <img src={location} alt="" />
+              <div className="rigth">
+                <motion.h2 variants={item}>{title}</motion.h2>
+                <motion.div variants={item} className="location">
+                  <LazyLoadImage src={location} alt="" />
                   <h3>Mongolia, Czech</h3>
-                </div>
+                </motion.div>
               </div>
             </div>
 
-            <div className={css.middle}>
-              <div className={css.item}>
+            <div className="middle">
+              <motion.div variants={item} variants={item} className="item">
                 <h1>{numFormat(subscriberCount)}</h1>
                 <h2>Захиалагчид</h2>
-              </div>
-              <div className={css.item}>
+              </motion.div>
+              <motion.div variants={item} className="item">
                 <h1>{videoCount}</h1>
                 <h2>Видео</h2>
-              </div>
-              <div className={css.item}>
+              </motion.div>
+              <motion.div variants={item} className="item">
                 <h1> {numFormat(viewCount)}</h1>
                 <h2>Нийт үзэлт</h2>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </Div>
         );
       })}
     </div>

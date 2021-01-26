@@ -2,12 +2,15 @@ import React, { useContext, useEffect } from "react";
 import ReactPlayer from "react-player";
 import { Link } from "react-router-dom";
 import { HomeContext } from "../../Contexts/HomeContext";
-import css from "./style.module.scss";
+
+import Div from "./style";
+
 import youtube from "../../svg/youtube.svg";
 import Comments from "../../Components/Comments/Comments";
-import VideoInfo from "../../Components/VideoInfo/VideoInfo";
 import bg from "../../img/comment_bg.jpg";
 import header from "../../img/commentHeader.png";
+import VideoInfo from "../../Components/VideoInfo";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 function Details({ match }) {
   const {
@@ -33,74 +36,73 @@ function Details({ match }) {
   const shareId = item?.resourceId?.videoId;
 
   return (
-    <div className={css.details}>
-      {/* POP UP ***************************************/}
-      <div className={css.detailsPopUp}>
-        <div
-          className={css.header}
-          style={{ backgroundImage: `url(${header})` }}
-        >
-          <div className={css.left}>
-            <div className={css.image} onClick={() => setShadow(!shadow)}>
-              <img src={item?.thumbnails?.maxres?.url} alt="" />
-              <div className={css.icon}>
-                <img src={youtube} alt="" />
+    <LazyLoadComponent>
+      <Div>
+        {/* POP UP ***************************************/}
+        <div className="detailsPopUp">
+          <div className="header" style={{ backgroundImage: `url(${header})` }}>
+            <div className="left">
+              <div className="image" onClick={() => setShadow(!shadow)}>
+                <img src={item?.thumbnails?.maxres?.url} alt="" />
+                <div className="icon">
+                  <img src={youtube} alt="" />
+                </div>
               </div>
+            </div>
+
+            <div className="rigth">
+              <h2>{item?.title.split("(")[0]}</h2>
+
+              <VideoInfo id={shareId} />
             </div>
           </div>
 
-          <div className={css.rigth}>
-            <h2>{item?.title.split("(")[0]}</h2>
+          {/* Comments */}
+          <div className="comments">
+            <h4>
+              {commentLength === "0"
+                ? "Уучлаарай энэ хэсэг Коммэнт байхгүй байна..."
+                : `${commentLength} коммэнт байна.`}
+            </h4>
 
-            <VideoInfo id={shareId} />
+            <Comments id={shareId} />
           </div>
         </div>
 
-        {/* Comments */}
-        <div className={css.comments}>
-          <h4>
-            {commentLength === "0"
-              ? "Уучлаарай энэ хэсэг Коммэнт байхгүй байна..."
-              : `${commentLength} коммэнт байна.`}
-          </h4>
-
-          <Comments id={shareId} />
-        </div>
-      </div>
-
-      {/* PLAYER ***************************************/}
-      <div
-        className={css.player}
-        style={shadow ? { display: "flex" } : { display: "none" }}
-      >
-        <div className={css.video}>
-          <ReactPlayer
-            width="100%"
-            height="100%"
-            playing={shadow}
-            url={`https://www.youtube.com/watch?v=${item?.resourceId?.videoId}`}
-          />
-        </div>
-
+        {/* PLAYER ***************************************/}
         <div
-          onClick={() => {
-            setShadow(!shadow);
-          }}
-          className={css.shadow}
-        ></div>
-      </div>
+          className="player"
+          style={shadow ? { display: "flex" } : { display: "none" }}
+        >
+          <div className="video">
+            <ReactPlayer
+              width="100%"
+              height="100%"
+              playing={shadow}
+              url={`https://www.youtube.com/watch?v=${item?.resourceId?.videoId}`}
+            />
+          </div>
 
-      {/* SHADOW ***************************************/}
-
-      <div onClick={() => setVideoMainId([])}>
-        <Link to="/">
           <div
-            className={css.toHome}
-            style={{ backgroundImage: `url(${bg})` }}
+            onClick={() => {
+              setShadow(!shadow);
+            }}
+            className="shadow"
           ></div>
-        </Link>
-      </div>
-    </div>
+        </div>
+
+        {/* SHADOW ***************************************/}
+
+        <div onClick={() => setVideoMainId([])}>
+          <Link to="/">
+            <div
+              className="toHome"
+              style={{ backgroundImage: `url(${bg})` }}
+            ></div>
+          </Link>
+        </div>
+      </Div>
+    </LazyLoadComponent>
   );
 }
 

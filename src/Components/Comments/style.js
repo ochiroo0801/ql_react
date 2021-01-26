@@ -1,6 +1,7 @@
-@import "../../Utilities/utilities";
+import styled from "styled-components";
+import { blue } from "../../Utilities/Utilities";
 
-.item {
+const Div = styled.div`
   width: 90%;
   margin: auto;
   margin-bottom: 30px;
@@ -53,7 +54,7 @@
   .author {
     width: 50px;
     height: 50px;
-    background: $blue;
+    background: ${blue};
     border-radius: 50%;
     overflow: hidden;
 
@@ -96,4 +97,6 @@
       line-height: 18px;
     }
   }
-}
+`;
+
+export default Div;
